@@ -1,0 +1,25 @@
+local BloxLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/ItsRainbow/BloxLib/main/source.lua'))()
+local UI = BloxLib:CreateUI('Example')
+
+local Tab1 = UI:AddTab('Tab 1')
+local Tab2 = UI:AddTab('Tab 2')
+
+Tab1:AddButton('200 JumpPower', function()
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 200
+end)
+Tab1:AddToggle('No-Clip', function(t)
+    shared.toggle = (t)
+    noclip = shared.toggle
+    game:GetService('RunService').Stepped:connect(function()
+        if noclip then
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+        end
+    end)
+end)
+Tab2:AddLabel('This is a label')
+Tab1:AddTextbox('WalkSpeed', false, function(value)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = (value)
+end)
+Tab1:AddSlider('Field Of View', 0, 120, function(value)
+    game.Workspace.Camera.FieldOfView = (value)
+end)
